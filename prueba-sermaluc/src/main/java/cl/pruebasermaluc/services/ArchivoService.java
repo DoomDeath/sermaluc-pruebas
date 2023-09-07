@@ -213,9 +213,6 @@ public class ArchivoService {
             System.out.println("año + fechaStr = " + año + fechaStr);
             guardarTrazaError("G", archivo, new ValidationError(100, "La línea " + lineNumber + " La fecha en el campo 'Fecha' debe ser menor o igual a la fecha del sistema."), FECHA_NO_VALIDA);
         }
-
-        // Implementa la validación de la fecha según el calendario aquí (puedes utilizar bibliotecas de manejo de fechas)
-
         return null; // Retorna null si el campo "Fecha" es válido
     }
 

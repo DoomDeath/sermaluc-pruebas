@@ -47,8 +47,6 @@ public class UserService {
         Optional<Usuario> usuarioExistente = usuarioRepository.findById(id);
         if (usuarioExistente.isPresent()) {
             Usuario usuario = usuarioExistente.get();
-
-            // Actualizar los campos del usuario con los valores proporcionados en usuarioActualizado
             usuario.setEmail(usuarioActualizado.getEmail());
             usuario.setNombre(usuarioActualizado.getNombre());
             usuario.setPassword(new BCryptPasswordEncoder().encode(usuarioActualizado.getPassword()));
