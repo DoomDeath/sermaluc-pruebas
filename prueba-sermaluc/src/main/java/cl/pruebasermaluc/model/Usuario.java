@@ -29,6 +29,17 @@ public class Usuario {
 
     private Set<Rol> roles = new HashSet<>();
 
+    public Usuario(){
+
+    }
+
+    public Usuario(int id, String email, String nombre, String password) {
+        this.id = id;
+        this.email = email;
+        this.nombre = nombre;
+        this.password = password;
+    }
+
     // Método para actualizar roles del usuario
     public void actualizarRoles(Set<Rol> nuevosRoles) {
         this.roles.clear();
