@@ -73,7 +73,7 @@ public class ArchivoController {
             return ResponseEntity.badRequest().body("El tamaño del archivo no cumple con los requisitos (1 KB - 2 MB).");
         }
         // Genera una ID única para el archivo utilizando UUID
-        String archivoId = UUID.randomUUID().toString();
+        String archivoId = UUID.randomUUID().toString(); // VALIDAR CON BASTIAN
 
         System.out.println("archivoId = " + archivoId);
 

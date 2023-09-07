@@ -57,7 +57,7 @@ public class ArchivoService {
             while ((line = reader.readLine()) != null) {
                 lineNumber++;
                 ValidationError resultadoValidacion = validarRegistro(lineNumber, line, nombreEntidadDesdeArchivo, archivo);
-                if (line.trim().length() != 25) {
+                if (line.trim().length() != 25) { // VALIDAR CON BASTIAN 
 
                     archivo.setEstadoArchivo("Procesado con errores");
                     logRegistro(archivo, line, archivo.getEstadoArchivo());
