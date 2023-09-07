@@ -129,7 +129,7 @@ public class UsuarioServiceTest {
         verify(usuarioRepository, times(1)).findById(idNoExistente);
     }
 
-   /* @Test
+    @Test
     public void testAsignarRolAUsuarioRolNoEncontrado() {
 
 
@@ -147,6 +147,8 @@ public class UsuarioServiceTest {
         usuarioActualizadoRequest.setPassword("NUEVO_PASSWORD");
         usuarioActualizadoRequest.setNombre("NUEVONOMBRE");
 
+        Mockito.when(usuarioRepository.findById(1)).thenReturn(Optional.of(usuarioExistenteSimulado));
+
         // Configura el comportamiento simulado para rolRepository.findByNombre
         when(rolRepository.findByNombre(usuarioActualizadoRequest.getRol())).thenReturn(null);
 
@@ -161,7 +163,7 @@ public class UsuarioServiceTest {
 
         // Verifica que rolRepository.findByNombre se haya llamado una vez con el nombre de rol proporcionado
         verify(rolRepository, times(1)).findByNombre(usuarioActualizadoRequest.getRol());
-    }*/
+    }
 
 
 
