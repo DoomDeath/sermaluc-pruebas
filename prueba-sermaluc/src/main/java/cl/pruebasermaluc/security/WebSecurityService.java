@@ -28,32 +28,38 @@ public class WebSecurityService {
     private final JWTAuthorizationFilter jwtAuthorizationFilter;
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
 
-        JWTAuthenticationFilter jwtAuthenticacionFilter = new JWTAuthenticationFilter();
-        jwtAuthenticacionFilter.setAuthenticationManager(authManager);
-        jwtAuthenticacionFilter.setFilterProcessesUrl("/login");
+        JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter();
+        jwtAuthenticationFilter.setAuthenticationManager(authManager);
+        jwtAuthenticationFilter.setFilterProcessesUrl("/login");
 
-        return http
+        http
                 .csrf().disable()
-                .authorizeRequests()
-                // Rutas públicas que no requieren autenticación
-                .antMatchers("/public/**").permitAll()
-                // Rutas protegidas por roles
-                .antMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "MODERATOR", "USER")
-                .antMatchers(HttpMethod.PUT, "/api/**").hasAnyRole("ADMIN", "MODERATOR")
-                .antMatchers(HttpMethod.DELETE, "/api/**").hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/api/**").hasAnyRole("ADMIN", "MODERATOR", "USER") // Agregar si hay operaciones POST protegidas
-                .anyRequest().authenticated()
-                .and()
+                .authorizeRequests(authorizeRequests ->
+                        authorizeRequests
+                                // Rutas públicas que no requieren autenticación
+                                .antMatchers("/public/**").permitAll()
+                                .antMatchers(HttpMethod.GET, "/procesar-archivo/**").hasAnyRole("ADMIN", "MODERATOR", "USER")
+                                .antMatchers(HttpMethod.PUT, "/procesar-archivo/**").hasAnyRole("ADMIN", "MODERATOR")
+                                .antMatchers(HttpMethod.DELETE, "/procesar-archivo/**").hasAnyRole("ADMIN")
+                                .antMatchers(HttpMethod.POST, "/procesar-archivo/**").hasAnyRole("ADMIN") // Agregar si hay operaciones POST protegidas
+                                // Rutas protegidas por roles
+                                .antMatchers(HttpMethod.GET, "/api/**").hasAnyRole("ADMIN", "MODERATOR", "USER")
+                                .antMatchers(HttpMethod.PUT, "/api/**").hasAnyRole("ADMIN", "MODERATOR")
+                                .antMatchers(HttpMethod.DELETE, "/api/**").hasAnyRole("ADMIN")
+                                .antMatchers(HttpMethod.POST, "/api/**").hasAnyRole("ADMIN", "MODERATOR", "USER") // Agregar si hay operaciones POST protegidas
+                                .anyRequest().authenticated()
+                )
                 .httpBasic()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilter(jwtAuthenticacionFilter)
-                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .addFilter(jwtAuthenticationFilter)
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
     }
 
     @Bean

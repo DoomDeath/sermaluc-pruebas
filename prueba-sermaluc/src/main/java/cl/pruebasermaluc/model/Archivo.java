@@ -14,17 +14,11 @@ public class Archivo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre_archivo", nullable = false)
+    @Column(name = "nombre_archivo")
     private String nombreArchivo;
 
-    @Column(name = "estado_archivo", nullable = false)
+    @Column(name = "estado_archivo")
     private String estadoArchivo;
-
-    @OneToMany(mappedBy = "archivo")
-    private List<Registro> registros;
-
-    @OneToMany(mappedBy = "archivo")
-    private List<IntentoValidacion> intentosValidacion;
 
 
 }

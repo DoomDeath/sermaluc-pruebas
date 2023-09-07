@@ -15,7 +15,7 @@ import java.util.Map;
 public class TokenUtils {
 
     private final static String ACCESS_TOKEN_SECRET = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
-    private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 2_592_000L;
+    private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 6L; //
 
 
 
@@ -32,6 +32,7 @@ public class TokenUtils {
                 .addClaims(extra)
                 .signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes()))
                 .compact();
+
     }
 
     public static UsernamePasswordAuthenticationToken getAuthenticationToken(String token) {

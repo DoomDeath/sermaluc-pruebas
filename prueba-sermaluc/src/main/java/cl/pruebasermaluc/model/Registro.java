@@ -14,13 +14,13 @@ public class Registro {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "archivo_id", nullable = false)
+    @JoinColumn(name = "archivo_id")
     private Archivo archivo;
 
-    @Column(name = "contenido_registro", nullable = false)
+    @Column(name = "contenido_registro", length = 25)
     private String contenidoRegistro;
 
-    @Column(name = "estado_validacion", nullable = false)
+    @Column(name = "estado_validacion")
     private String estadoValidacion;
 
 

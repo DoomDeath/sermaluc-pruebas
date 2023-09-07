@@ -16,11 +16,15 @@ public class TrazaError {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "archivo_id")
+    private Archivo archivo;
+
     @Column(name = "codigo_error")
     private Integer codigoError;
 
     @Column(name = "gravedad_error")
-    private Character gravedadError;
+    private String gravedadError;
 
     @Column(name = "validacion_error")
     private String validacionError;

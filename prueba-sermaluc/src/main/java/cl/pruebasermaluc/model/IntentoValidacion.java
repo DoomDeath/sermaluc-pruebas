@@ -15,13 +15,13 @@ public class IntentoValidacion {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "archivo_id", nullable = false)
+    @JoinColumn(name = "archivo_id")
     private Archivo archivo;
 
-    @Column(name = "fecha_intento", nullable = false)
-    private Date fechaIntento;
+    @Column(name = "fecha_intento")
+    private String fechaIntento;
 
-    @Column(name = "resultado_validacion", nullable = false)
+    @Column(name = "resultado_validacion")
     private String resultadoValidacion;
 
 

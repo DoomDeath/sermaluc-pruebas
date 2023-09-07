@@ -4,7 +4,6 @@ package cl.pruebasermaluc.services;
 import cl.pruebasermaluc.model.Rol;
 import cl.pruebasermaluc.model.Usuario;
 import cl.pruebasermaluc.model.UsuarioActualizadoRequest;
-import cl.pruebasermaluc.repository.ContactoRepository;
 import cl.pruebasermaluc.repository.RolRepository;
 import cl.pruebasermaluc.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,7 @@ import java.util.Set;
 @Service
 public class UserService {
 
-    @Autowired
-    ContactoRepository contactoRepository;
+
 
     @Autowired
     UsuarioRepository usuarioRepository;
@@ -31,6 +29,9 @@ public class UserService {
 
     @Autowired
     RolRepository rolRepository;
+
+    public UserService(UsuarioRepository usuarioRepository, RolRepository rolRepository) {
+    }
 
 
     public List<Usuario> getAllUsers() {
@@ -50,7 +51,6 @@ public class UserService {
             // Actualizar los campos del usuario con los valores proporcionados en usuarioActualizado
             usuario.setEmail(usuarioActualizado.getEmail());
             usuario.setNombre(usuarioActualizado.getNombre());
-            //usuario.setPassword(usuarioActualizado.getPassword());
             usuario.setPassword(new BCryptPasswordEncoder().encode(usuarioActualizado.getPassword()));
 
             Rol rol = rolRepository.findByNombre(usuarioActualizado.getRol());
